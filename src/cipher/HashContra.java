@@ -1,36 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cipher;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author 2dam
+ * @author Egoitz,Josu
  */
 public class HashContra {
 
-    public static String hashContra(byte[] texto) {
-        MessageDigest messageDigest;
-        String encriptacion = "SHA";
-        String mensaje = null;
+    private static final Logger LOGGER = java.util.logging.Logger.getLogger("/Cipher/HashContra");
 
+    public static String hashContra(String texto) {
         try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] hashBytes = md5.digest(texto.getBytes());
 
-            messageDigest = MessageDigest.getInstance(encriptacion);
-
-            messageDigest.update(texto);
-
-            byte[] digest = messageDigest.digest();
+            // Convert the byte array to a hexadecimal representation
+            StringBuilder hexStringBuilder = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = String.format("%02X", b);
+                hexStringBuilder.append(hex);
+            }
+            System.out.println(hexStringBuilder.toString());
+            return hexStringBuilder.toString();
 
         } catch (NoSuchAlgorithmException e) {
-
+            e.printStackTrace();
+            return null;
         }
-        return mensaje;
-    }
 
+    }
 }
