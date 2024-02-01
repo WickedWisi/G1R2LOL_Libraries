@@ -10,7 +10,7 @@ public class GenerarClaves {
     public void keyGenerator(String folderPath) {
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
+            keyPairGenerator.initialize(1024);
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
             File folder = new File(folderPath);
